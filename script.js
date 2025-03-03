@@ -35,6 +35,7 @@ const resultContainer = document.getElementById("result-container");
 const ScoreHtml = document.getElementById("score");
 let currentQuestionIndex = 0;
 let score = 0;
+let userAns;
 
 document.addEventListener("DOMContentLoaded", function () {
   startBtn.addEventListener("click", () => {
@@ -60,11 +61,7 @@ function showQuestion() {
 
 function selectAns() {
   choicesList.addEventListener("click", (event) => {
-    if (event.target.textContent === questions[currentQuestionIndex].answer) {
-      score++;
-    } else {
-      score += 0;
-    }
+    userAns = event.target.textContent;
     nextBtn.classList.remove("hidden");
   });
   nextBtnExecution();
@@ -73,6 +70,13 @@ function selectAns() {
 function nextBtnExecution() {
     
     nextBtn.addEventListener("click",function(){
+      if(userAns == questions[currentQuestionIndex].answer){
+        score = score +1;
+      }
+      else{
+        score = score +0;
+      }
+
       currentQuestionIndex++;
       if(currentQuestionIndex < questions.length){
         showQuestion();
